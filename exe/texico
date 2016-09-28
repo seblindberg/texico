@@ -30,24 +30,26 @@ filename =
     selected_file
   end
 
+if File.exist? filename
+  say HighLine.color("Compiling ", :bold) + filename
+else
+  say HighLine.color("Could not find the file #{filename}", :red)
+  exit
+end
+
 # Create target folder
 FileUtils.mkdir_p 'build'
 
 #level = 0
-Texico.convert filename, target: 'build' do |output|
-  # output.each_line do |line|
-  #   line.chomp!
-  #   first_char = line[0]
-  #
-  #   indent = ' ' * level
-  #
-  #   say indent + line
-  #
-  #   if line[0] == '('
-  #     level += 1
-  #   elsif line[0] == ')'
-  #     level -= 1
-  #   end
-  # end
-  say output
+result =
+  Texico.convert filename, target: 'build' do |output|
+  end
+  
+if result.successful?
+  say HighLine.color("Result saved to ", :green)
+else
+  say HighLine.color("Unfortunately there were some errors:\n", :red)
+  result.each_error do |line, message|
+    say HighLine.color(format('%5d: ', line), :bold) + message
+  end
 end
