@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+require 'texico'
+require 'fileutils'
+require 'highline/import'
+
+# Find latex file
+tex_files = Dir['*.tex']
+
+filename =
+  case tex_files.length
+  when 1
+    tex_files[0]
+  when 0
+    say HighLine.color('Could not find the tex file', :red)
+    exit
+  else
+    say HighLine.color('More than one tex file detected', :bold)
+    
+    tex_files.each_with_index { |f, i| say "[#{i + 1}] #{f}" }
+    
+    answer =
+      ask 'Which one should I compile? ', Integer do |q|
+        q.in = 1..tex_files.length
+      end
+      
+    selected_file = tex_files[answer - 1]
+    say HighLine.color("Got it, I'll remeber that!", :green)
+    
+    selected_file
+  end
+
+# Create target folder
+FileUtils.mkdir_p 'build'
+
+#level = 0
+Texico.convert filename, target: 'build' do |output|
+  # output.each_line do |line|
+  #   line.chomp!
+  #   first_char = line[0]
+  #
+  #   indent = ' ' * level
+  #
+  #   say indent + line
+  #
+  #   if line[0] == '('
+  #     level += 1
+  #   elsif line[0] == ')'
+  #     level -= 1
+  #   end
+  # end
+  say output
+end
