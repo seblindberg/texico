@@ -17,17 +17,22 @@ filename =
   else
     say HighLine.color('More than one tex file detected', :bold)
     
-    tex_files.each_with_index { |f, i| say "[#{i + 1}] #{f}" }
-    
-    answer =
-      ask 'Which one should I compile? ', Integer do |q|
-        q.in = 1..tex_files.length
-      end
+    if (index = tex_files.find_index('main.tex'))
+      say "I'm going to assume you want main.tex"
+      tex_files[index]
+    else
+      tex_files.each_with_index { |f, i| say "[#{i + 1}] #{f}" }
       
-    selected_file = tex_files[answer - 1]
-    say HighLine.color("Got it, I'll remeber that!", :green)
-    
-    selected_file
+      answer =
+        ask 'Which one should I compile? ', Integer do |q|
+          q.in = 1..tex_files.length
+        end
+        
+      selected_file = tex_files[answer - 1]
+      say HighLine.color("Got it, I'll remeber that!", :green)
+      
+      selected_file
+    end
   end
 
 if File.exist? filename
@@ -46,7 +51,8 @@ result =
   end
   
 if result.successful?
-  say HighLine.color("Result saved to ", :green)
+  file, = result.output
+  say HighLine.color("Saving to ", :green, :bold) + file
 else
   say HighLine.color("Unfortunately there were some errors:\n", :red)
   result.each_error do |line, message|

@@ -1,5 +1,8 @@
 require 'texico/version'
 require 'texico/result'
+require 'texico/line_feeder'
+require 'texico/parser'
+require 'texico/parser/output_node'
 require 'texico/compiler'
 
 module Texico

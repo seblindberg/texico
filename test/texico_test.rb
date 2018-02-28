@@ -5,7 +5,5 @@ class TexicoTest < Minitest::Test
     refute_nil ::Texico::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
-  end
+ 
 end
