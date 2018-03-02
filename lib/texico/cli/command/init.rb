@@ -24,13 +24,16 @@ module Texico
           config =
             prompt.collect do
               key(:name).ask('What should be the name of the output PDF?',
-                             default: folder_name)
+                             default: folder_name.downcase.gsub(' ', '-'))
               
               key(:title).ask('What is the title of your document?',
-                              default: 'Template Paper')
+                              default: folder_name)
                               
-              key(:author).ask('Who is the author?',
+              key(:author).ask('What is your name?',
                                 default: 'Template Author')
+
+              key(:email).ask('What is your email address?',
+                              default: 'authod@example.com')
               
               key(:template).select("Select a template", template_choices)
             end
@@ -38,12 +41,9 @@ module Texico
           prompt.say '🌮 Creating new project', color: :bold
                     
           template = Template.load config.delete(:template)
-          template.copy(config, opts) do |src, _, did_copy|
-            if did_copy
-              prompt.say "Copying #{File.basename src}"
-            else
-              prompt.say "Would copy #{File.basename src}"
-            end
+          unless template.copy(config, opts)
+            prompt.error '   The main file already exists. Use -f if you ' \
+                         'want me to replace it.'
           end
           
           ConfigFile.create config, opts

@@ -6,16 +6,23 @@ module Texico
     class Template
       BASE_PATH = File.expand_path('../../../../templates', __FILE__)
       
-      def copy(config, opts, &block)
+      def copy(config, opts)
         entries = @entries.dup
+
         # Find the main file
         main_entry = @entries.find { |(f, _)| f == 'main.erb' }
         
         # Copy each entry
         @entries.each do |entry|
           next if entry == main_entry
-          copy_file entry[0], entry[1], opts, &block
+          if opts[:dry_run]
+            
+          else
+            self.class.copy_file entry[1], entry[0], opts
+          end
         end
+        
+        return if opts[:dry_run]
         
         main_file_body =
           File.open main_entry[1], 'rb' do |main_file|
@@ -25,19 +32,14 @@ module Texico
         
         main_target = main_entry[0].sub(/erb\z/, 'tex')
         
+        return false if File.exist?(main_target) && !opts[:force]
+        
         File.open main_target, 'wb' do |main_file|
           main_file.write main_file_body
         end
       end
       
       private
-      
-      def copy_file(src, dest, opts)
-        yield src, dest, !opts[:dry_run]
-        return if opts[:dry_run]
-        
-        FileUtils.cp_r src, dest, remove_destination: opts[:force]
-      end
 
       def initialize(entries)
         @entries = entries.freeze
@@ -50,6 +52,10 @@ module Texico
         
         def exist?(template)
           File.exist? template
+        end
+        
+        def copy_file(src, dest, opts)
+          FileUtils.cp_r src, dest, remove_destination: opts[:force]
         end
 
         def load(template)
