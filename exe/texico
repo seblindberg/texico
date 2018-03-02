@@ -1,61 +1,136 @@
 #!/usr/bin/env ruby
 
-require 'texico'
+#require 'texico'
 require 'fileutils'
-require 'highline/import'
+require 'slop'
+require 'pastel'
+require 'tty-prompt'
 
-# Find latex file
-tex_files = Dir['*.tex']
 
-filename =
-  case tex_files.length
-  when 1
-    tex_files[0]
-  when 0
-    say HighLine.color('Could not find the tex file', :red)
-    exit
-  else
-    say HighLine.color('More than one tex file detected', :bold)
-    
-    if (index = tex_files.find_index('main.tex'))
-      say "I'm going to assume you want main.tex"
-      tex_files[index]
-    else
-      tex_files.each_with_index { |f, i| say "[#{i + 1}] #{f}" }
-      
-      answer =
-        ask 'Which one should I compile? ', Integer do |q|
-          q.in = 1..tex_files.length
-        end
-        
-      selected_file = tex_files[answer - 1]
-      say HighLine.color("Got it, I'll remeber that!", :green)
-      
-      selected_file
-    end
-  end
+require 'texico/cli/config_file'
+require 'texico/cli/template'
+require 'texico/cli/command/base'
+require 'texico/cli/command/init'
+require 'texico/cli/command/build'
+require 'texico/cli/command'
+require 'texico/cli/arg_parser'
 
-if File.exist? filename
-  say HighLine.color("Compiling ", :bold) + filename
-else
-  say HighLine.color("Could not find the file #{filename}", :red)
-  exit
-end
 
-# Create target folder
-FileUtils.mkdir_p 'build'
 
-#level = 0
-result =
-  Texico.convert filename, target: 'build' do |output|
-  end
-  
-if result.successful?
-  file, = result.output
-  say HighLine.color("Saving to ", :green, :bold) + file
-else
-  say HighLine.color("Unfortunately there were some errors:\n", :red)
-  result.each_error do |line, message|
-    say HighLine.color(format('%5d: ', line), :bold) + message
-  end
-end
+# Notes:
+# - Use 🌮 somewhere/everywhere
+#
+
+
+parser  = Texico::CLI::ArgParser.new
+command = parser.parse
+
+command.run
+
+# pastel = Pastel.new
+# opts = Slop.parse do |o|
+#   o.banner = "#{pastel.yellow('texico')} [options] ..."
+#
+#   o.bool '-v', '--verbose', 'enable verbose mode'
+#   o.bool '-q', '--quiet', 'suppress output (quiet mode)'
+#   o.bool '-h', '--help', 'Display this help'
+#
+#   o.on '--version', 'print the version' do
+#     puts '0.2.0' #Texico::VERSION
+#     exit
+#   end
+#
+#   o.separator ""
+#   o.separator "#{pastel.yellow('texico')} [options] init"
+#   o.separator "    Initializes a new 🌮 project in the current directory."
+# end
+#
+# if opts[:help]
+#   puts opts
+#   exit
+# end
+#
+# case opts.arguments.first
+# when nil
+#   puts pastel.bold('🌮 Building current project')
+# when 'init'
+#   prompt = TTY::Prompt.new
+#
+#   folder_name = File.basename Dir.pwd
+#
+#   templates = Dir.glob(File.expand_path('../../templates/*', __FILE__))
+#   template_choices =
+#     Hash[templates.map { |path| [File.basename(path).capitalize, path] }]
+#
+#   # Notes:
+#   # - Use folder name as default display name
+#   # - Provide options for using inlined or managed references
+#   puts pastel.bold('🌮 Creating new project')
+#   config =
+#     begin
+#       prompt.collect do
+#         key(:name).ask('What should be the name of the output PDF?', default: folder_name)
+#         key(:template).select("Select a template", template_choices)
+#       end
+#     rescue TTY::Reader::InputInterrupt
+#       puts 'Aborting'
+#       exit
+#     end
+#   p config
+# end
+
+# # Find latex file
+# tex_files = Dir['*.tex']
+#
+# filename =
+#   case tex_files.length
+#   when 1
+#     tex_files[0]
+#   when 0
+#     say HighLine.color('Could not find the tex file', :red)
+#     exit
+#   else
+#     say HighLine.color('More than one tex file detected', :bold)
+#
+#     if (index = tex_files.find_index('main.tex'))
+#       say "I'm going to assume you want main.tex"
+#       tex_files[index]
+#     else
+#       tex_files.each_with_index { |f, i| say "[#{i + 1}] #{f}" }
+#
+#       answer =
+#         ask 'Which one should I compile? ', Integer do |q|
+#           q.in = 1..tex_files.length
+#         end
+#
+#       selected_file = tex_files[answer - 1]
+#       say HighLine.color("Got it, I'll remeber that!", :green)
+#
+#       selected_file
+#     end
+#   end
+#
+# if File.exist? filename
+#   say HighLine.color("Compiling ", :bold) + filename
+# else
+#   say HighLine.color("Could not find the file #{filename}", :red)
+#   exit
+# end
+#
+# # Create target folder
+# FileUtils.mkdir_p 'build'
+#
+# #level = 0
+# result =
+#   Texico.convert filename, target: 'build' do |output|
+#   end
+#
+# if result.successful?
+#   file, = result.output
+#   say HighLine.color("Saving to ", :green, :bold) + file
+# else
+#   say HighLine.color("Unfortunately there were some errors:\n", :red)
+#   result.each_error do |line, message|
+#     say HighLine.color(format('%5d: ', line), :bold) + message
+#   end
+# end
