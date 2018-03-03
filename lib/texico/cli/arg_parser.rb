@@ -28,7 +28,8 @@ module Texico
             end
 
             o.separator "\n#{title} [options] init"
-            o.separator "    Initializes a new 🌮 project in the current directory."
+            o.separator "    Initializes a new #{ICON} project in the current" \
+                        "directory."
             
             o.separator "\n#{title} [options] config [--global] KEY=VALUE"
             o.separator "    Change configuration options"

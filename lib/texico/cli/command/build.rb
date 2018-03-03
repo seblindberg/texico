@@ -5,14 +5,16 @@ module Texico
         def run
           config = load_config
           
-          prompt.say '🌮 Building project', color: :bold
+          prompt.say "#{ICON} Building project", color: :bold
           prompt.say "   Using config #{config.inspect}"
           
           build config
         end
         
         def build(config)
-          system "latexmk -pdf -output-directory=#{config[:build]}" \
+          system "latexmk -pdf -output-directory=#{config[:build]} " \
+                         "-latexoption=-interaction=nonstopmode " \
+                         "-file-line-error " \
                          "#{config[:main_filename]}"
         end
 

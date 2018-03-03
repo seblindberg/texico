@@ -1,3 +1,4 @@
+require 'texico/cli'
 require 'texico/cli/config_file'
 require 'texico/cli/template'
 require 'texico/cli/command/base'

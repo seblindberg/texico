@@ -10,7 +10,7 @@ module Texico
         end
 
         def run
-          prompt.error "Unknown command: '#{opts[:cmd]}'"
+          prompt.error "I don't know what you mean with '#{opts[:cmd]}'"
         end
         
         def load_config(full = true)

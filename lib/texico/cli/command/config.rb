@@ -21,16 +21,16 @@ module Texico
           end
           
           if did_change
-            prompt.say "🌮 Writing new configuration\n", color: :bold
+            prompt.say "#{ICON} Writing new configuration\n", color: :bold
           else
-            prompt.say "🌮 Current configuration\n", color: :bold
+            prompt.say "#{ICON} Current configuration\n", color: :bold
           end
           
           table = TTY::Table.new \
             header: %w(Option Value).map { |v| prompt.decorate v, :bold },
             rows: config.to_a
           
-          prompt.say table.render(:basic) + "\n"
+          prompt.say table.render(:basic)
           
           return unless did_change
           

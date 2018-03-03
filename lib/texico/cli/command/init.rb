@@ -10,13 +10,13 @@ module Texico
           # As for configuration options for this session
           config = ask_config
           # Indicate that the config was accepted
-          prompt.say "🌮 Creating new project\n", color: :bold
+          prompt.say "#{ICON} Creating new project\n", color: :bold
           # Copy the template project
           copy_template config.delete(:template), config
           # Save the other config options to file
           ConfigFile.store config, opts
           # We are done
-          prompt.say "🌮 Done!", color: :bold
+          prompt.say "#{ICON} Done!", color: :bold
         rescue TTY::Reader::InputInterrupt
           prompt.error 'Aborting'
           exit
@@ -27,15 +27,15 @@ module Texico
         def welcome
           if ConfigFile.exist?(opts)
             if opts[:force]
-              prompt.warn '🌮 Reinitializeing existing project.'
+              prompt.warn "#{ICON} Reinitializeing existing project."
             else
-              prompt.say '🌮 Hey! This project has already been setup with ' \
-                         "#{opts[:title]}!", color: :bold
+              prompt.say "#{ICON} Hey! This project has already been setup " \
+                         "with #{opts[:title]}!", color: :bold
               prompt.say '   Use -f to force me to reinitialize it.'
               exit
             end
           else
-            prompt.say '🌮 I just need a few details', color: :bold
+            prompt.say "#{ICON} I just need a few details", color: :bold
           end
           prompt.say "\n"
         end
