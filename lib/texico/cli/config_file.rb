@@ -14,7 +14,7 @@ module Texico
         author: 'Author',
         email: 'author@example.com',
         build: 'build',
-        main_filename: 'main.tex'
+        main_file: 'main.tex'
       }.freeze
       
       def_delegator :@config, :[]

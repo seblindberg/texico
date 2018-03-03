@@ -9,5 +9,7 @@ require 'texico/cli/command/clean'
 require 'texico/cli/command'
 require 'texico/cli/arg_parser'
 
+require 'texico/compiler'
+
 module Texico
 end
