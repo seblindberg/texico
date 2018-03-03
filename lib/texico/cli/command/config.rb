@@ -58,7 +58,7 @@ module Texico
 
         class << self
           def match?(command)
-            command == 'config' || command.nil?
+            command == 'config'
           end
         end
       end
