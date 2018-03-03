@@ -1,3 +1,5 @@
+require 'tty-tree'
+
 module Texico
   module CLI
     module Command
@@ -38,19 +40,38 @@ module Texico
               key(:template).select("Select a template", template_choices)
             end
           
-          prompt.say '🌮 Creating new project', color: :bold
-                    
-          template = Template.load config.delete(:template)
-          unless template.copy(config, opts)
-            prompt.error '   The main file already exists. Use -f if you ' \
-                         'want me to replace it.'
-          end
+          prompt.say "🌮 Creating new project\n", color: :bold
           
+          structure = copy_template config.delete(:template), config, opts
+          prompt.say structure.render
+          prompt.say "\n"
+                    
           ConfigFile.create config, opts
           
         rescue TTY::Reader::InputInterrupt
           prompt.error 'Aborting'
           exit
+        end
+        
+        private
+        
+        def copy_template(template_path, config, opts)
+          template_name = File.basename(template_path).capitalize
+          template = Template.load template_path
+          template_structure =
+            template.copy(config, opts) do |file, exist, force|
+              if exist && force
+                prompt.decorate(file, :yellow)
+              elsif exist
+                prompt.decorate(file, :red)
+              elsif opts[:dry_run]
+                file
+              else
+                prompt.decorate(file, :green)
+              end
+            end
+
+          TTY::Tree.new({ template_name => template_structure })
         end
 
         class << self
