@@ -40,10 +40,12 @@ module Texico
         self.class.map_tree_leaf file_tree do |name, local_path|
           # Copy file
           src_path = File.expand_path local_path, @base_path
+          dest_exist = File.exist? local_path
+          
           self.class.copy src_path, local_path, opts
           # Give a chance to render the file
-          yield name, File.exist?(local_path), opts[:force] if block_given?
-        end.push(yield main_target, main_target_exist, opts[:force])
+          yield name, dest_exist if block_given?
+        end.push(yield main_target, main_target_exist)
       end
       
       private
@@ -75,7 +77,7 @@ module Texico
           tree.each do |node|
             next if node.is_a? String
             dir = node.keys[0]
-            path = File.expand_path dir, root
+            path = "#{root}#{dir}/"
             yield path
             each_tree_dir node[dir], path, &block
           end
@@ -84,12 +86,12 @@ module Texico
         def map_tree_leaf(tree, root = '', &block)
           tree.map do |node|
             if node.is_a? String
-              yield node, File.expand_path(node, root)
+              yield node, "#{root}#{node}"
             else
               dir = node.keys[0]
               {
                 dir => map_tree_leaf(node[dir],
-                                     File.expand_path(dir, root),
+                                     "#{root}#{dir}/",
                                      &block)
               }
             end

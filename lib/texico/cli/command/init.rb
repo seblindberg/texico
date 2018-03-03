@@ -5,6 +5,27 @@ module Texico
     module Command
       class Init < Base
         def run
+          welcome
+          
+          config = ask_config
+          
+          prompt.say "🌮 Creating new project\n", color: :bold
+          
+          copy_template config.delete(:template), config
+          
+          # Create config file
+          ConfigFile.create config, opts
+          
+          prompt.say "🌮 Done!", color: :bold
+          
+        rescue TTY::Reader::InputInterrupt
+          prompt.error 'Aborting'
+          exit
+        end
+        
+        private
+        
+        def welcome
           if ConfigFile.exist?(opts)
             if opts[:force]
               prompt.warn '🌮 Reinitializeing existing project.'
@@ -17,50 +38,33 @@ module Texico
           else
             prompt.say '🌮 I just need a few details', color: :bold
           end
-          
+          prompt.say "\n"
+        end
+        
+        def ask_config
           folder_name = File.basename Dir.pwd
           template_choices =
             Hash[Template.list.map { |p| [File.basename(p).capitalize, p] }]
-          
-          prompt.say "\n"
-          config =
-            prompt.collect do
-              key(:name).ask('What should be the name of the output PDF?',
+            
+          prompt.collect do
+            key(:name).ask(  'What should be the name of the output PDF?',
                              default: folder_name.downcase.gsub(' ', '-'))
-              
-              key(:title).ask('What is the title of your document?',
-                              default: folder_name)
-                              
-              key(:author).ask('What is your name?',
-                                default: 'Template Author')
-
-              key(:email).ask('What is your email address?',
-                              default: 'authod@example.com')
-              
-              key(:template).select("Select a template", template_choices)
-            end
-          
-          prompt.say "🌮 Creating new project\n", color: :bold
-          
-          structure = copy_template config.delete(:template), config, opts
-          prompt.say structure.render
-          prompt.say "\n"
-                    
-          ConfigFile.create config, opts
-          
-        rescue TTY::Reader::InputInterrupt
-          prompt.error 'Aborting'
-          exit
+            key(:title).ask( 'What is the title of your document?',
+                             default: folder_name)
+            key(:author).ask('What is your name?',
+                              default: 'Template Author')
+            key(:email).ask( 'What is your email address?',
+                             default: 'authod@example.com')
+            key(:template).select("Select a template", template_choices)
+          end
         end
         
-        private
-        
-        def copy_template(template_path, config, opts)
+        def copy_template(template_path, config)
           template_name = File.basename(template_path).capitalize
           template = Template.load template_path
           template_structure =
-            template.copy(config, opts) do |file, exist, force|
-              if exist && force
+            template.copy(config, opts) do |file, exist|
+              if exist && opts[:force]
                 prompt.decorate(file, :yellow)
               elsif exist
                 prompt.decorate(file, :red)
@@ -71,7 +75,17 @@ module Texico
               end
             end
 
-          TTY::Tree.new({ template_name => template_structure })
+          tree = TTY::Tree.new({ template_name => template_structure })
+          prompt.say tree.render + "\n"
+          file_copy_legend
+        end
+        
+        def file_copy_legend
+          prompt.say format("%s Did copy  %s Replaced existing  %s File existed\n\n",
+            prompt.decorate("∎", :green),
+            prompt.decorate("∎", :yellow),
+            prompt.decorate("∎", :red)
+          )
         end
 
         class << self
