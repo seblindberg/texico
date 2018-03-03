@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pastel", "~> 0.7"
   spec.add_dependency "tty-prompt", "~> 0.15"
   spec.add_dependency "tty-tree", "~> 0.1"
+  spec.add_dependency "tty-table", "~> 0.10"
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"

@@ -18,6 +18,11 @@ module Texico
       }.freeze
       
       def_delegator :@config, :[]
+      def_delegator :@config, :to_a
+      
+      def to_hash
+        @config.dup
+      end
       
       private
       
@@ -31,12 +36,12 @@ module Texico
         end
         
         def global
-          @global_defaults ||= read_global
+          new read_global
         end
         
         def default
           return @default if @default
-          @default = DEFAULT_CONFIG.merge global
+          @default = DEFAULT_CONFIG.merge read_global
         end
         
         def load(opts)
@@ -47,7 +52,7 @@ module Texico
         def store(config, opts, filename = opts[:config])
           return if opts[:dry_run]
           File.open filename, 'wb' do |file|
-            file.write YAML.dump(config)
+            file.write YAML.dump(config.to_hash)
           end
         end
         
@@ -61,7 +66,7 @@ module Texico
         end
         
         def read_global
-          read_local GLOBAL_CONFIG_PATH
+          @global_defaults ||= read_local GLOBAL_CONFIG_PATH
         end
       end
     end
