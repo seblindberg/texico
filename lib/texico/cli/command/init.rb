@@ -5,19 +5,18 @@ module Texico
     module Command
       class Init < Base
         def run
+          # Show welcome text
           welcome
-          
+          # As for configuration options for this session
           config = ask_config
-          
+          # Indicate that the config was accepted
           prompt.say "🌮 Creating new project\n", color: :bold
-          
+          # Copy the template project
           copy_template config.delete(:template), config
-          
-          # Create config file
+          # Save the other config options to file
           ConfigFile.create config, opts
-          
+          # We are done
           prompt.say "🌮 Done!", color: :bold
-          
         rescue TTY::Reader::InputInterrupt
           prompt.error 'Aborting'
           exit
@@ -52,9 +51,9 @@ module Texico
             key(:title).ask( 'What is the title of your document?',
                              default: folder_name)
             key(:author).ask('What is your name?',
-                              default: 'Template Author')
+                             default: ConfigFile.default[:author])
             key(:email).ask( 'What is your email address?',
-                             default: 'authod@example.com')
+                             default: ConfigFile.default[:email])
             key(:template).select("Select a template", template_choices)
           end
         end
@@ -81,11 +80,12 @@ module Texico
         end
         
         def file_copy_legend
-          prompt.say format("%s Did copy  %s Replaced existing  %s File existed\n\n",
-            prompt.decorate("∎", :green),
-            prompt.decorate("∎", :yellow),
-            prompt.decorate("∎", :red)
-          )
+          prompt.say \
+            format("%s Did copy  %s Replaced existing  %s File existed\n\n",
+                    prompt.decorate("∎", :green),
+                    prompt.decorate("∎", :yellow),
+                    prompt.decorate("∎", :red)
+                  )
         end
 
         class << self

@@ -1,18 +1,10 @@
-require 'texico/version'
-require 'texico/result'
-require 'texico/line_feeder'
-require 'texico/parser'
-require 'texico/parser/output_node'
-require 'texico/compiler'
+require 'texico/cli/config_file'
+require 'texico/cli/template'
+require 'texico/cli/command/base'
+require 'texico/cli/command/init'
+require 'texico/cli/command/build'
+require 'texico/cli/command'
+require 'texico/cli/arg_parser'
 
 module Texico
-
-  def convert(filename, target: 'build')
-    compiler = Compiler.new output_directory: target
-    compiler.compile filename do |output|
-      yield output
-    end
-  end
-  
-  module_function :convert
 end

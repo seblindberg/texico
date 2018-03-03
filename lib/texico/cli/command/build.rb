@@ -6,9 +6,9 @@ module Texico
           config = load_config
           
           unless config
-            prompt.say 'I Couldn\'t find a valid config file. Run texico ' \
-                       'init to setup a new project'
-
+            prompt.say 'I Couldn\'t find a valid config file. Run ' + \
+                       prompt.decorate('texico init', :bold, :yellow) + \
+                       ' to setup a new project'
             exit
           end
           
