@@ -12,6 +12,19 @@ module Texico
         def run
           prompt.error "Unknown command: '#{opts[:cmd]}'"
         end
+        
+        def load_config(full = true)
+          ConfigFile.load(opts, full).tap do |config|
+            unless config
+              prompt.say 'I Couldn\'t find a valid config file. Run ' + \
+                         prompt.decorate('texico init', :bold, :yellow) + \
+                         ' to setup a new project'
+              exit
+            end
+          end
+        end
+        
+        protected
 
         class << self
           def match?(command)

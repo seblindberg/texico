@@ -7,16 +7,9 @@ module Texico
         def run
           config =
             if opts[:global]
-              load_global
+              ConfigFile.global
             else
-              load_local.tap do |config|
-                unless config
-                  prompt.say 'I Couldn\'t find a valid config file. Run ' + \
-                             prompt.decorate('texico init', :bold, :yellow) + \
-                             ' to setup a new project'
-                  exit
-                end
-              end
+              load_config false
             end.to_hash
           
           did_change = false
@@ -46,14 +39,6 @@ module Texico
           else
             ConfigFile.store(config, opts)
           end
-        end
-
-        def load_local
-          ConfigFile.load opts
-        end
-        
-        def load_global
-          ConfigFile.global
         end
 
         class << self

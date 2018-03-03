@@ -33,6 +33,9 @@ module Texico
             o.separator "\n#{title} [options] config [--global] KEY=VALUE"
             o.separator "    Change configuration options"
             o.bool '-g', '--global', 'edit the global configuration'
+            
+            o.separator "\n#{title} [options] clean"
+            o.separator "    Remove all build files"
           end
           
         if opts[:help]

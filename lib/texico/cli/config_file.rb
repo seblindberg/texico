@@ -44,9 +44,9 @@ module Texico
           @default = DEFAULT_CONFIG.merge read_global
         end
         
-        def load(opts)
+        def load(opts, full = true)
           return false unless File.exist? opts[:config]
-          new read_local(opts[:config]), default
+          new read_local(opts[:config]), (full ? default : {})
         end
         
         def store(config, opts, filename = opts[:config])
