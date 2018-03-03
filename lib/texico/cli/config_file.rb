@@ -6,13 +6,15 @@ module Texico
     class ConfigFile
       extend Forwardable
       
-      DEFAULT_NAME   = '.texico'
+      DEFAULT_NAME       = '.texico'.freeze
+      GLOBAL_CONFIG_PATH = File.expand_path(DEFAULT_NAME, ENV['HOME']).freeze
       DEFAULT_CONFIG = {
         name: 'main',
         title: 'Title',
         author: 'Author',
         email: 'author@example.com',
-        build: 'build'
+        build: 'build',
+        main_filename: 'main.tex'
       }.freeze
       
       def_delegator :@config, :[]
@@ -20,7 +22,6 @@ module Texico
       private
       
       def initialize(config, defaults = {})
-        p config
         @config = defaults.merge(config).freeze
       end
       
@@ -29,22 +30,23 @@ module Texico
           File.exist? opts[:config]
         end
         
+        def global
+          @global_defaults ||= read_global
+        end
+        
         def default
           return @default if @default
-          @default = DEFAULT_CONFIG.merge read_global
+          @default = DEFAULT_CONFIG.merge global
         end
         
         def load(opts)
           return false unless File.exist? opts[:config]
-          
           new read_local(opts[:config]), default
-        #rescue Errno::ENOENT
-          #false
         end
         
-        def create(config, opts)
+        def store(config, opts, filename = opts[:config])
           return if opts[:dry_run]
-          File.open opts[:config], 'wb' do |file|
+          File.open filename, 'wb' do |file|
             file.write YAML.dump(config)
           end
         end
@@ -59,8 +61,7 @@ module Texico
         end
         
         def read_global
-          path = File.expand_path(DEFAULT_NAME, ENV['HOME'])
-          read_local path
+          read_local GLOBAL_CONFIG_PATH
         end
       end
     end

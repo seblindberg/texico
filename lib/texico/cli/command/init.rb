@@ -14,7 +14,7 @@ module Texico
           # Copy the template project
           copy_template config.delete(:template), config
           # Save the other config options to file
-          ConfigFile.create config, opts
+          ConfigFile.store config, opts
           # We are done
           prompt.say "🌮 Done!", color: :bold
         rescue TTY::Reader::InputInterrupt

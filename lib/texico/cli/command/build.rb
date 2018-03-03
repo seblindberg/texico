@@ -14,6 +14,8 @@ module Texico
           
           prompt.say '🌮 Building project', color: :bold
           prompt.say "   Using config #{config.inspect}"
+          
+          system "latexmk -pdf -output-directory=#{config[:build]} -latexoption='-jobname=#{config[:name]}' #{config[:main_filename]}"
         end
 
         def load_config

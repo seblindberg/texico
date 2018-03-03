@@ -27,9 +27,12 @@ module Texico
               exit
             end
 
-            o.separator ""
-            o.separator "#{title} [options] init"
+            o.separator "\n#{title} [options] init"
             o.separator "    Initializes a new 🌮 project in the current directory."
+            
+            o.separator "\n#{title} [options] config [--global] KEY=VALUE"
+            o.separator "    Change configuration options"
+            o.bool '-g', '--global', 'edit the global configuration'
           end
           
         if opts[:help]
