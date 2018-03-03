@@ -1,405 +1,99 @@
+Latexmk: This is Latexmk, John Collins, 17 Jan. 2018, version: 4.55.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'main.tex'
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -file-line-error -recorder -output-directory="build"  "main.tex"'
+------------
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex)
- \write18 enabled.
+ restricted \write18 enabled.
 entering extended mode
 (./main.tex
-
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 22 language(s) loaded.
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/article.cls
-
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/size11.clo
-)
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/size11.clo))
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/inputenc.sty
-
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/utf8.def
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/t1enc.dfu
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/ot1enc.dfu
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/omsenc.dfu
-)
-)
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/t1enc.dfu)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/base/omsenc.dfu)))
 (/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/babel.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/switch.def
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/switch.def)
 (/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel-english/english.ldf
-
 (/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/babel.def
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/switch.def
-)
-)
-)
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/babel/txtbabel.def))))
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsmath.sty
-
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amstext.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsgen.sty
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsbsy.sty
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsopn.sty
-)
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amscls/amsthm.sty
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amscls/amsthm.sty)
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/graphicx.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/keyval.sty
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/keyval.sty)
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/graphics.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/trig.sty
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-def/pdftex.def
-)
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/cleveref/cleveref.sty
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.s
+ty
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/hobsub-generic.st
+y)) (/usr/local/texlive/2017basic/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/auxhook.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/kvoptions.sty)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/latexconfig/hyperref.cfg)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/url/url.sty))
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty)
+) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/cleveref/cleveref.sty)
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/autonum/autonum.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/etextools/etextools.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/etex-pkg/etex.sty
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/letltxmacro.sty
-)
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/etex-pkg/etex.sty))
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/textpos/textpos.sty
-
 Package: textpos 2016/06/07 1.8, absolute positioning of text on the page
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/ms/everyshi.sty
-)
-
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/ms/everyshi.sty)
 Grid set 16 x 16 = 37.34424pt x 52.81541pt
 TextBlockOrigin set to 0pt x 0pt
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfutil-comm
-on.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfutil-comm
-on-lists.tex
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfutil-late
-x.def
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.
-tex
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.cod
-e.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
-.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfkeysfilte
-red.code.tex
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdf
-tex.def
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-com
-mon-pdf.def
-)
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoft
-path.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprot
-ocol.code.tex
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/xcolor/xcolor.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/graphics-cfg/color.cfg
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.cod
-e.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.
-tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.
-tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathparser.cod
-e.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-code.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-basic.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-trigonometric.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-random.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-comparison.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-base.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-round.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-misc.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.
-integerarithmetics.code.tex
-))
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code
-.tex
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoin
-ts.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
-construct.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
-usage.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescop
-es.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregrap
-hicstate.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
-sformations.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequic
-k.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobje
-cts.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepath
-processing.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearro
-ws.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshad
-e.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimag
-e.code.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexte
-rnal.code.tex
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelaye
-rs.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretran
-sparency.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatt
-erns.code.tex
-)))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/modules/pgfmoduleshape
-s.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.
-code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
-rsion-0-65.sty
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-ve
-rsion-1-18.sty
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code
-.tex
-))
- (/usr/local/texlive/2017basic/texmf-dist/tex/latex/pgf/math/pgfmath.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/utilities/pgffor.code.
-tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
-)
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tik
-z.code.tex
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/libraries/pgflibrarypl
-othandlers.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/modules/pgfmodulematri
-x.code.tex
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
-raries/tikzlibrarytopaths.code.tex
-)
-))
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/enumitem/enumitem.sty
-)
-
-(build/main.aux
-)
-
+)) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/enumitem/enumitem.sty)
+./main.tex:36: Undefined control sequence.
+l.36 \missing
+
+(build/main.aux)
 (/usr/local/texlive/2017basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
-
 [Loading MPS to PDF converter (version 2006.09.02).]
-)
- (/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/grfext.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-)
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-)
-)
-)
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-)
-)
-
+) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/oberdiek/grfext.sty)
 (/usr/local/texlive/2017basic/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-)
-)
- ABD: EveryShipout initializing macros
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsa.fd
-)
-
-(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsb.fd
-)
-
-./main.tex:80: Undefined control sequence.
-l.80 \sction
-						{Problem 1}
-./main.tex:80:  ==> Fatal error occurred, no output PDF file produced!
+)) (/usr/local/texlive/2017basic/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2017basic/texmf-dist/tex/generic/oberdiek/gettitlestring.st
+y)) (build/main.out) (build/main.out) ABD: EveryShipout initializing macros
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2017basic/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/usr/lo
+cal/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(build/main.aux) )
+(see the transcript file for additional information)</usr/local/texlive/2017bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/201
+7basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/
+2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texli
+ve/2017basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on build/main.pdf (1 page, 37715 bytes).
 Transcript written on build/main.log.
+=== TeX engine is 'pdfTeX'
+Latexmk: Log file says output to 'build/main.pdf'
+Latexmk: Errors, so I did not complete making targets
+Collected error summary (may duplicate other messages):
+  pdflatex: Command for 'pdflatex' gave return code 1
+      Refer to 'build/main.log' for details
+Latexmk: Use the -f option to force complete processing,
+ unless error was exceeding maximum runs of latex/pdflatex.
