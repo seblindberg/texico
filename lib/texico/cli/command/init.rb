@@ -16,10 +16,7 @@ module Texico
           # Save the other config options to file
           ConfigFile.store config, target, opts
           
-          unless opts[:no_git]
-            system "git init '#{target}' && cd '#{target}' && git add . " \
-                   "&& git commit -m 'Initial commit'"
-          end
+          Git.init(target, true) unless opts[:no_git]
           
           # We are done
           prompt.say "#{ICON} Done!", color: :bold
