@@ -1,6 +1,10 @@
+require 'texico/version'
 require 'texico/cli'
+require 'texico/template/file'
+require 'texico/template/file_status'
+require 'texico/template'
+require 'texico/compiler'
 require 'texico/cli/config_file'
-require 'texico/cli/template'
 require 'texico/cli/command/base'
 require 'texico/cli/command/init'
 require 'texico/cli/command/build'
@@ -8,8 +12,6 @@ require 'texico/cli/command/config'
 require 'texico/cli/command/clean'
 require 'texico/cli/command'
 require 'texico/cli/arg_parser'
-
-require 'texico/compiler'
 
 module Texico
 end

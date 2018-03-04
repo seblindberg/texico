@@ -27,7 +27,7 @@ module Texico
               exit
             end
 
-            o.separator "\n#{title} [options] init"
+            o.separator "\n#{title} [options] init [directory]"
             o.separator "    Initializes a new #{ICON} project in the current" \
                         "directory."
             

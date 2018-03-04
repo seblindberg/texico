@@ -24,6 +24,10 @@ module Texico
         
         private
         
+        def target
+          File.expand_path('', opts[:args][0] || '.')
+        end
+        
         def welcome
           if ConfigFile.exist?(opts)
             if opts[:force]
@@ -41,7 +45,7 @@ module Texico
         end
         
         def ask_config
-          folder_name = File.basename Dir.pwd
+          folder_name = File.basename target
           template_choices =
             Hash[Template.list.map { |p| [File.basename(p).capitalize, p] }]
             
