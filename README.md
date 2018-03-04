@@ -1,5 +1,9 @@
 # Texico
 
+[![Gem Version](https://badge.fury.io/rb/texico.svg)](https://badge.fury.io/rb/texico)
+[![Build Status](https://travis-ci.org/seblindberg/texico.svg?branch=master)](https://travis-ci.org/seblindberg/texico)
+[![Inline docs](http://inch-ci.org/github/seblindberg/texico.svg?branch=master)](http://inch-ci.org/github/seblindberg/texico)
+
 Texico is created to suit my Latex workflow. It can be used to
 
 - setup new projects,
