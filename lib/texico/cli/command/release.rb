@@ -11,7 +11,20 @@ module Texico
           end
           
           unless label
-            prompt.error "#{ICON} You have to give me a tag label."
+            tags = Git.list_tags('.')
+            num_tags = tags.length
+            count = case num_tags
+                    when 0 then 'no releases'
+                    when 1 then 'one release'
+                    else "#{num_tags} releases"
+                    end
+            prompt.say "#{ICON} This project currently has #{count}\n",
+                       color: :bold
+
+            if num_tags > 0
+              prompt.say tags.map { |t| "* #{t}" }.join("\n")
+            end
+
             exit
           end
           
@@ -23,19 +36,15 @@ module Texico
             exit
           end
           
-          tag
+          Git.tag '.', label, "Releasing #{label}"
         end
         
         private
-        
+
         def label
           opts[:args][0]
         end
-        
-        def tag
-          system "git tag -a #{label} -m 'Releasing #{label}'"
-        end
-        
+
         class << self
           def match?(command)
             command == 'release'
