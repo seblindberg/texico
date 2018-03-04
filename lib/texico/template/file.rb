@@ -2,6 +2,11 @@ require 'fileutils'
 
 module Texico
   class Template
+    # File
+    #
+    # The Template File object is an internal object used by the Template class
+    # to copy and render template files transparently. It should never be used
+    # directly.
     class File
       TEMPLATE_EXTNAME = '.erb'.freeze
 
@@ -57,9 +62,9 @@ module Texico
           FileUtils.mkdir_p dest_dir unless opts[:dry_run]
         end
 
-        if is_template?
+        if template?
           err = copy_template src_path, dest_path, params,
-                       noop: opts[:dry_run], verbose: opts[:verbose]
+                              noop: opts[:dry_run], verbose: opts[:verbose]
           return err if err
         else
           FileUtils.cp src_path, dest_path,
@@ -71,7 +76,7 @@ module Texico
 
       private
 
-      def is_template?
+      def template?
         ::File.extname(@relative_path) == TEMPLATE_EXTNAME
       end
 
@@ -96,6 +101,6 @@ module Texico
       rescue NameError => e
         FileStatus.new self, e
       end
-    end # File
-  end # Template
-end # Texico
+    end
+  end
+end

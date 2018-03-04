@@ -1,120 +1,88 @@
 require 'erb'
 require 'fileutils'
-# require 'tty-tree'
 
 module Texico
+  # Template
+  #
+  # Class for handling Texico templates. A template is really just a folder with
+  # some files in it. The template object handles moving those files, as well as
+  # rendering any .erb files.
   class Template
     BASE_PATH = ::File.expand_path('../../../templates', __FILE__)
-    
-    # Returns a report of what files where copied.
-    def copy(config, opts)
-      # Extract main file
-      file_tree = @file_tree.dup
-      # TODO: raise something if the main file does not exist
-      main_file   = file_tree.delete 'main.erb'
-      main_target = main_file.sub(/erb\z/, 'tex')
-      main_target_exist = ::File.exist?(main_target)
 
-      # 1. Render the main file
-      unless opts[:dry_run] || (!opts[:force] && main_target_exist)
-        main_file_path = ::File.expand_path main_file, @base_path
-        main_file_body =
-          ::File.open main_file_path, 'rb' do |file|
-            erb_template = ERB.new file.read, 0
-            erb_template.result_with_hash config
-          end
+    attr_reader :name
 
-        ::File.open main_target, 'wb' do |file|
-          file.write main_file_body
-        end
-      end
-
-      # 2. Create directory structure
-      self.class.each_tree_dir file_tree do |path|
-        self.class.mkdir path, opts
-      end
-
-      # 3. Copy files from tree
-      #    TODO: sort the tree
-      self.class.map_tree_leaf file_tree do |name, local_path|
-        # Copy file
-        src_path = ::File.expand_path local_path, @base_path
-        dest_exist = ::File.exist? local_path
-        
-        self.class.copy src_path, local_path, opts
-        # Give a chance to render the file
-        yield name, dest_exist if block_given?
-      end.push(yield main_target, main_target_exist)
+    # Tree
+    #
+    # Returns the template structure in a format compatible with tty-tree.
+    def tree
+      { name => self.class.map_tree(@file_tree, &:to_s) }
     end
-    
+
+    # Returns a report of what files where copied.
+    def copy(dest, params, opts, &block)
+      map_status = block_given? ? block : ->(status) { status.to_s }
+      status_tree =
+        self.class.map_tree(@file_tree) do |file|
+          map_status.call(file.copy(params, dest, opts))
+        end
+      { name => status_tree }
+    end
+
     private
 
-    def initialize(base_path, file_tree)
-      @base_path = base_path
+    def initialize(name, file_tree)
+      @name      = name.freeze
       @file_tree = file_tree
+
+      freeze
     end
 
     class << self
+      # List
+      #
+      # List available templates
       def list
         Dir.glob "#{BASE_PATH}/*"
       end
-      
-      def exist?(template)
-        ::File.exist? template
+
+      def exist?(_)
+        raise RuntimeError
+        #::File.exist? template
       end
-      
-      def load_file_tree(root, dir = '')
-        base_path = ::File.expand_path dir, root
+
+      def load_file_tree(root, current_dir = '')
+        base_path = ::File.expand_path current_dir, root
         Dir.entries(base_path)
-          .reject { |e| ['.', '..'].include? e }
-          .map do |e|
-            local_path = (dir + e).freeze
-            full_path = ::File.expand_path local_path, root
-            if ::File.file?(full_path)
-              File.new local_path, root
-            else
-              { e => load_file_tree(root, local_path + '/') }.freeze
-            end
-          end.freeze
+           .reject { |entry| ['.', '..'].include? entry }
+           .map do |entry|
+             local_path = (current_dir + entry).freeze
+             full_path  = ::File.expand_path local_path, root
+
+             if ::File.file?(full_path)
+               File.new local_path, root
+             else
+               { entry.freeze => load_file_tree(root, local_path + '/') }.freeze
+             end
+           end.freeze
       end
-      
-      def each_tree_dir(tree, root = '', &block)
-        tree.each do |node|
-          next if node.is_a? String
-          dir = node.keys[0]
-          path = "#{root}#{dir}/"
-          yield path
-          each_tree_dir node[dir], path, &block
-        end
-      end
-      
-      def map_tree_leaf(tree, root = '', &block)
+
+      def map_tree(tree, root = '', &block)
         tree.map do |node|
-          if node.is_a? String
-            yield node, "#{root}#{node}"
-          else
+          if node.is_a? Hash
             dir = node.keys[0]
-            {
-              dir => map_tree_leaf(node[dir],
-                                   "#{root}#{dir}/",
-                                   &block)
-            }
+            { dir => map_tree(node[dir], "#{root}#{dir}/", &block) }
+          else
+            yield node
           end
         end
       end
-      
-      def mkdir(path, opts)
-        FileUtils.mkdir_p path unless opts[:dry_run]
-      end
-      
-      def copy(src, dest, opts)
-        return if opts[:dry_run] || (!opts[:force] && ::File.exist?(dest))
-        FileUtils.cp src, dest
-      end
 
       def load(template)
-        file_tree = load_file_tree template
-        new template.freeze, file_tree
+        file_tree     = load_file_tree template
+        template_name = ::File.basename(template).capitalize
+
+        new template_name, file_tree
       rescue Errno::ENOENT
         false
       end
