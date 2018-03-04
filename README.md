@@ -1,39 +1,44 @@
 # Texico
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/texico`. To experiment with that code, run `bin/console` for an interactive prompt.
+Texico is created to suit my Latex workflow. It can be used to
 
-TODO: Delete this and the text above, and describe your gem
+- setup new projects,
+- build existing projects and
+- tag versions for release.
+
+More functionality is planned.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Building projects requires `latexmk`. You can install it by running
 
-```ruby
-gem 'texico'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+    $ tlmgr install latexmk
+    
+Then install Texico with
 
     $ gem install texico
 
 ## Usage
 
-TODO: Write usage instructions here
+To setup a new project in the current directory, run
+
+    $ texico init
+    
+You will be guided through the setup process. When it completes you will be able to build the project using
+
+    $ texico
+    
+### Global Config
+
+I find it useful to store my name and email address in the global config. You can either create a `.texico` file in your home directory and add the relevant fields, or run
+
+    $ texico config --global author='Your Name' email=name@example.com
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/texico.
-
 
 ## License
 

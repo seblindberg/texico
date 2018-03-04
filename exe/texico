@@ -1,61 +1,21 @@
 #!/usr/bin/env ruby
 
+#require 'texico'
+# require 'fileutils'
+# require 'slop'
+# require 'pastel'
+# require 'tty-prompt'
+
 require 'texico'
-require 'fileutils'
-require 'highline/import'
 
-# Find latex file
-tex_files = Dir['*.tex']
 
-filename =
-  case tex_files.length
-  when 1
-    tex_files[0]
-  when 0
-    say HighLine.color('Could not find the tex file', :red)
-    exit
-  else
-    say HighLine.color('More than one tex file detected', :bold)
-    
-    if (index = tex_files.find_index('main.tex'))
-      say "I'm going to assume you want main.tex"
-      tex_files[index]
-    else
-      tex_files.each_with_index { |f, i| say "[#{i + 1}] #{f}" }
-      
-      answer =
-        ask 'Which one should I compile? ', Integer do |q|
-          q.in = 1..tex_files.length
-        end
-        
-      selected_file = tex_files[answer - 1]
-      say HighLine.color("Got it, I'll remeber that!", :green)
-      
-      selected_file
-    end
-  end
 
-if File.exist? filename
-  say HighLine.color("Compiling ", :bold) + filename
-else
-  say HighLine.color("Could not find the file #{filename}", :red)
-  exit
-end
+# Notes:
+# - Use 🌮 somewhere/everywhere
+#
 
-# Create target folder
-FileUtils.mkdir_p 'build'
+parser  = Texico::CLI::ArgParser.new
+command = parser.parse
 
-#level = 0
-result =
-  Texico.convert filename, target: 'build' do |output|
-  end
-  
-if result.successful?
-  file, = result.output
-  say HighLine.color("Saving to ", :green, :bold) + file
-else
-  say HighLine.color("Unfortunately there were some errors:\n", :red)
-  result.each_error do |line, message|
-    say HighLine.color(format('%5d: ', line), :bold) + message
-  end
-end
+command.run
+#puts ""

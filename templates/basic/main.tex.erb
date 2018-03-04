@@ -1,0 +1,93 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage[demo]{graphicx} % REMOVE "demo" to include figures!
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{autonum}
+\usepackage[inline]{enumitem}
+
+%
+% ---- Global Document Properties ----
+%
+
+\title{<%= title %>}
+\date{\today}
+\author{
+  <%= author %>\\
+  <%= email %>
+}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.3in
+\textheight=9.6in
+\headsep=0.25in
+
+% Turn off numbering for sections
+\setcounter{secnumdepth}{0}
+
+\graphicspath{{./assets/}}
+
+
+%
+% ---- Enumeration Styles ----
+%
+
+% Set default style to a), b) ...
+%\setlist[enumerate]{label=\alph*)}
+% Use \begin{enumerate*} ... for inline lists
+
+
+%
+% ---- Custom Commands ----
+%
+
+% Usage: 		 \image{file_name}{caption}
+%        		 \image[width=8cm]{file_name}{caption}
+% Reference: \cref{fig:file_name}
+\newcommand{\image}[3][width=1.0\columnwidth]{
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[#1]{#2}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}
+}
+
+
+%
+% ---- Document ----
+% Exported to build/<%= name %>.pdf
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+
+
+
+%
+% ---- Bibliography ----
+%
+
+% Usage: \begin{thebibliography}{[max_number_citations]}
+%
+% Usage: \bibitem{author:year}
+%        Author, F., Authod, S.:
+%        Nonlinear oscillations and
+%        boundary-value problems for Hamiltonian systems.
+%        Arch. Rat. Mech. Anal. 78, 315--333 (1982)
+% Cite:  \cite{author:year}
+
+% \begin{thebibliography}{5}
+%   \bibitem{gold:2003}
+%   Gold, E.
+%   TechRepublic Tutorial: How to diagnose a faulty power supply
+%   \url{https://tex.stackexchange.com/questions/3587/how-can-i-use-bibtex-to-cite-a-web-page#3608} (2003)
+% \end{thebibliography}
+\end{document}
