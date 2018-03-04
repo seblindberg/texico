@@ -25,7 +25,6 @@ describe Texico::Template do
     it 'copies the template' do
       res = template.copy target_path, params, {}
       assert_equal 'Template', res.keys[0]
-      p res
     end
   end
 end

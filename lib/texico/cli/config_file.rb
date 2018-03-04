@@ -49,9 +49,10 @@ module Texico
           new read_local(opts[:config]), (full ? default : {})
         end
         
-        def store(config, opts, filename = opts[:config])
+        def store(config, dest = '', opts = {})
           return if opts[:dry_run]
-          File.open filename, 'wb' do |file|
+          dest_path = File.expand_path opts[:config], dest
+          File.open dest_path, 'wb' do |file|
             file.write YAML.dump(config.to_hash)
           end
         end
