@@ -9,28 +9,18 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Sebastian Lindberg"]
   spec.email         = ["seb.lindberg@gmail.com"]
 
-  spec.summary       = %q{A really dumb gem for quickly compiling latex files with as few arguments as possible.}
-  #spec.description   = %q{TODO: Write a longer description or delete this line.}
-  #spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Command line utility for managing Latex projects."
+  spec.description   = "Utility for handling project templates, build " \
+                       "settings and project management"
+  spec.homepage      = "https://github.com/seblindberg/texico"
   spec.license       = "MIT"
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
-  end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  
-  #spec.add_dependency "rooted_tree", "~> 0.3"
-  
+
   spec.add_dependency "slop", "~> 4.6"
-  spec.add_dependency "pastel", "~> 0.7"
   spec.add_dependency "tty-prompt", "~> 0.15"
   spec.add_dependency "tty-tree", "~> 0.1"
   spec.add_dependency "tty-table", "~> 0.10"
