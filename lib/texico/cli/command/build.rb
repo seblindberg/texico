@@ -8,7 +8,6 @@ module Texico
           config = load_config
           
           prompt.say "#{ICON} Building project", color: :bold
-          prompt.say "   Using config #{config.inspect}"
           
           build config
         end
