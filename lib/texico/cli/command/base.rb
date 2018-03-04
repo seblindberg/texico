@@ -40,11 +40,11 @@ module Texico
           end
 
           def select(command)
-            subclass = @commands&.sort_by { |e| -e[:prio] }
-                                &.map!    { |e| e[:klass] }
-                                &.find    { |klass| klass.match? command }
+            @commands&.sort_by { |e| -e[:prio] }
+                     &.map!    { |e| e[:klass] }
+                     &.each    { |k| sk = k.select command; return sk if sk }
 
-            subclass || (match?(command) && self)
+            match?(command) && self
           end
 
           def match(command, *args)

@@ -17,8 +17,9 @@ module Texico
           compiler = Compiler.new output_directory: SHADOW_BUILD_DIR
           build_result = compiler.compile config[:main_file]
           
-          return unless build_result
+          return false unless build_result
           copy_build build_result[:file], config
+          true
         end
         
         private

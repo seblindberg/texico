@@ -40,7 +40,7 @@ module Texico
             o.separator "\n#{title} [options] clean"
             o.separator "    Remove all build files"
             
-            o.separator "\n#{title} [options] release"
+            o.separator "\n#{title} [options] release TAG_LABEL"
             o.separator "    Build and tag the project"
           end
           
