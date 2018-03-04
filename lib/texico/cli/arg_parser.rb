@@ -28,15 +28,20 @@ module Texico
             end
 
             o.separator "\n#{title} [options] init [directory]"
-            o.separator "    Initializes a new #{ICON} project in the current" \
-                        "directory."
+            o.separator "    Initializes a new #{ICON} project in the " \
+                        "current directory."
+                        
+            o.bool '--no-git', 'Do not initialize a new git repository'
             
             o.separator "\n#{title} [options] config [--global] KEY=VALUE"
-            o.separator "    Change configuration options"
+            o.separator "    Change configuration options."
             o.bool '-g', '--global', 'edit the global configuration'
             
             o.separator "\n#{title} [options] clean"
             o.separator "    Remove all build files"
+            
+            o.separator "\n#{title} [options] release"
+            o.separator "    Build and tag the project"
           end
           
         if opts[:help]

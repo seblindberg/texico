@@ -15,6 +15,9 @@ module Texico
           copy_template config
           # Save the other config options to file
           ConfigFile.store config, target, opts
+          
+          system "git init #{target}" unless opts[:no_git]
+          
           # We are done
           prompt.say "#{ICON} Done!", color: :bold
         rescue TTY::Reader::InputInterrupt
@@ -91,7 +94,7 @@ module Texico
             format("%s Did copy  %s Replaced existing  %s File existed  %s Template Error\n\n",
                     prompt.decorate("∎", :green),
                     prompt.decorate("∎", :yellow),
-                    prompt.decorate("∎", :red)
+                    prompt.decorate("∎", :red),
                     prompt.decorate("∎", :blue)
                   )
         end
